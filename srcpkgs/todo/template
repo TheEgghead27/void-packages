@@ -1,0 +1,16 @@
+# Template file for 'todo'
+pkgname=todo
+version=2.4
+revision=2
+build_style=cargo
+build_helper=rust
+short_desc="Simple todo cli program written in rust"
+maintainer="David Chen <dchen07@protonmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/sioodmy/todo"
+distfiles="https://github.com/sioodmy/todo/archive/refs/tags/${version}.tar.gz"
+checksum=3905909de5dd6e3a849505c5c97264a9b6d83cdd8e171a319233e68142162656
+
+post_install() {
+	mv ${DESTDIR}/usr/bin/todo-bin ${DESTDIR}/usr/bin/todo
+}
