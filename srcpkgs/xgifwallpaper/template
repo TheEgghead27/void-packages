@@ -1,0 +1,13 @@
+# Template file for 'xgifwallpaper'
+pkgname=xgifwallpaper
+version=0.3.1
+revision=1
+build_style=cargo
+makedepends="libX11-devel libXinerama-devel libXext-devel libXau-devel libxcb-devel libXdmcp-devel"
+depends="libX11 libXinerama libXext libXau libxcb libXdmcp"
+short_desc="Use an animated GIF as wallpaper on X11 systems"
+maintainer="David Chen <dchen07@protonmail.com>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/calculon102/xgifwallpaper"
+distfiles="https://github.com/calculon102/xgifwallpaper/archive/refs/tags/v${version}.tar.gz"
+checksum=4fc28e7832fd1d39901dcd3b05c1be949d3def01d308b1548d48ac1682f81f61
