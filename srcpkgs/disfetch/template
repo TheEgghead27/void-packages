@@ -1,13 +1,13 @@
 # Template file for 'disfetch'
 pkgname=disfetch
-version=2.15
+version=3.0
 revision=1
 short_desc="Yet another *nix distro fetching program, but less complex"
 maintainer="David Chen <dchen07@protonmail.com>"
 license="MIT"
 homepage="https://github.com/q60/disfetch"
 distfiles="https://github.com/q60/disfetch/archive/${version}.tar.gz"
-checksum=2926083db6197cb946f182b4cf1ecbc061e9b0327dd92ab090999a5ed10cbb29
+checksum=300077568290093ceaa7d861bf8ceff68d45254989df5a1326074b1d33245b5f
 
 do_install() {
 	ls
