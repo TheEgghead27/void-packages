@@ -1,0 +1,40 @@
+# Template file for 'libprimis'
+pkgname=libprimis
+version=0.19a
+revision=1
+archs="x86_64*"
+wrksrc=${pkgname}
+build_wrksrc="src"
+build_style=gnu-makefile
+make_use_env="yes"
+#make_build_args=""
+#conf_files=""
+#make_dirs="/var/log/dir 0755 root root"
+#hostmakedepends=""
+makedepends="SDL2-devel SDL2_image-devel SDL2_mixer-devel SDL2_ttf-devel glew-devel"
+depends="SDL2 SDL2_image SDL2_mixer SDL2_ttf glew"
+short_desc="Libprimis: Imprimis' 3D destroyable world engine"
+maintainer="David Chen <dchen07@protonmail.com>"
+license="Zlib"
+homepage="https://github.com/project-imprimis/libprimis/"
+distfiles="https://eggsbps.eastus.cloudapp.azure.com/project-imprimis/${pkgname}-${version}.tar.gz"
+checksum=367f5743db2022c7dbc19aa0dc16d5fc4992a2bb119f7a70055c6fe911f709af
+
+#do_install() {
+#	vinstall libprimis.so 755 usr/lib/
+#	ln -s usr/lib/libprimis.so.0.13.1 usr/lib/libprimis.so.0
+#	ln -s usr/lib/libprimis.so.0.13.1 usr/lib/libprimis.so
+#}
+
+
+libprimis-devel_package() {
+	depends="${sourcepkg}>=${version}_${revision}"
+	short_desc+=" - development files"
+	pkg_install() {
+		# vmove usr/share/man/man3
+		vmove usr/include
+#		# vmove usr/lib/pkgconfig
+#		# vmove "usr/lib/*.a"
+#		vmove usr/lib/*.so
+	}
+}
