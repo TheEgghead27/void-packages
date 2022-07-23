@@ -1,0 +1,28 @@
+# Template file for 'imprimis'
+pkgname=imprimis
+version=0.19a
+revision=1
+archs="x86_64*"
+wrksrc=${pkgname}
+build_style=gnu-makefile
+make_use_env="yes"
+#makedepends="libprimis-devel SDL2-devel SDL2_image-devel SDL2_mixer-devel SDL2_ttf-devel glew-devel"
+makedepends="SDL2-devel SDL2_image-devel SDL2_mixer-devel SDL2_ttf-devel glew-devel"
+depends="SDL2 SDL2_image SDL2_mixer SDL2_ttf glew"
+short_desc="Destroyable world 3D shooter"
+maintainer="David Chen <dchen07@protonmail.com>"
+license="Zlib"
+homepage="https://github.com/project-imprimis/imprimis"
+distfiles="https://eggsbps.eastus.cloudapp.azure.com/project-imprimis/${pkgname}-${version}.tar.gz https://eggsbps.eastus.cloudapp.azure.com/project-imprimis/libprimis-${version}.tar.gz"
+checksum="4c48149f2651ed9cad3b1ebd41064cd019928d2deacfb63d1a350426c5093782 d04a7633b3e0a24877790eca31b373b6b05d66114b32b3753c7732cd4a7874f5"
+
+do_build() {
+	: ${make_cmd:=make}
+
+	cd /builddir/libprimis/src
+	${make_cmd} ${makejobs} ${make_build_args} ${make_build_target}
+	mv libprimis.so ${wrksrc}
+
+	cd ${wrksrc}
+	${make_cmd} ${makejobs} ${make_build_args} ${make_build_target}
+}
