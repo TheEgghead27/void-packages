@@ -1,7 +1,7 @@
 # Template file for 'imprimis'
 pkgname=imprimis
-version=0.19a
-revision=4
+version=0.20a
+revision=1
 archs="x86_64*"
 wrksrc=${pkgname}
 build_style=gnu-makefile
@@ -14,7 +14,7 @@ maintainer="David Chen <dchen07@protonmail.com>"
 license="Zlib"
 homepage="https://github.com/project-imprimis/imprimis"
 distfiles="https://eggsbps.eastus.cloudapp.azure.com/project-imprimis/${pkgname}-${version}.tar.gz https://eggsbps.eastus.cloudapp.azure.com/project-imprimis/libprimis-${version}.tar.gz"
-checksum="8d99fa119100fb41ded9d6660913710686ed937ef7c11b58f7908bf2e84ef636 93a8db646101f6034bfdb1cc912addc6321a695c1ee6f3f760a5c5c97a24184a"
+checksum="97febd6a2fdf7240898bd29afe3e567760da84994c44c8ec27407920b47647e1 202b883a4692d41979224491401ad21a4a9635d5a86ef37bdca6dea9560f066c"
 
 do_build() {
 	: ${make_cmd:=make}
