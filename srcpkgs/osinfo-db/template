@@ -1,6 +1,6 @@
 # Template file for 'osinfo-db'
 pkgname=osinfo-db
-version=20220727
+version=20231215
 revision=1
 build_style=fetch
 hostmakedepends="osinfo-db-tools"
@@ -9,7 +9,7 @@ maintainer="skmpz <dem.procopiou@gmail.com>"
 license="GPL-2.0-or-later"
 homepage="https://libosinfo.org"
 distfiles="https://releases.pagure.org/libosinfo/osinfo-db-${version}.tar.xz"
-checksum=2291e5234ed899a830c36f2b4056ff5e76235f4ba07b593421f4865290634d5e
+checksum=dfb7c5975ce4efffd92aadd00094a0f7c593b41988fda539915f6459f7164554
 skip_extraction="${pkgname}-${version}.tar.xz"
 
 do_install() {

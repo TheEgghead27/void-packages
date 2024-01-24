@@ -1,6 +1,6 @@
 # Template file for 'akonadi-notes'
 pkgname=akonadi-notes
-version=22.04.3
+version=23.08.4
 revision=1
 build_style=cmake
 hostmakedepends="extra-cmake-modules python3 qt5-qmake qt5-host-tools
@@ -11,7 +11,7 @@ maintainer="John <me@johnnynator.dev>"
 license="LGPL-2.1-or-later"
 homepage="https://kontact.kde.org/"
 distfiles="${KDE_SITE}/release-service/${version}/src/${pkgname}-${version}.tar.xz"
-checksum=b4525d32dcd2559eaa2f5ec5a86c4a4c17fe7ab14ffd019d30586f78c249495f
+checksum=b06a906b4734925afe589d75d1741e862011f5c9a0656d51ff43ca81ce5a8c6e
 
 akonadi-notes-devel_package() {
 	depends="${sourcepkg}>=${version}_${revision}"

@@ -1,26 +1,19 @@
 # Template file for 'starship'
 pkgname=starship
-version=1.9.1
+version=1.17.1
 revision=1
 build_style=cargo
 build_helper=qemu
-hostmakedepends="libgit2-devel pkg-config"
-makedepends="libgit2-devel openssl-devel"
+hostmakedepends="cmake pkg-config"
 depends="git"
 checkdepends="git fish-shell"
 short_desc="Minimal, fast and customizable cross-shell prompt"
 maintainer="cinerea0 <cinerea0@protonmail.com>"
 license="ISC"
 homepage="https://starship.rs"
+changelog="https://raw.githubusercontent.com/starship/starship/master/CHANGELOG.md"
 distfiles="https://github.com/starship/starship/archive/refs/tags/v${version}.tar.gz"
-checksum=2b54bee07bf67504a1bb170d37dc8d6accab4594d35731bbdf0e8a631c8d1585
-
-post_build() {
-	STARSHIP="target/${RUST_TARGET}/release/starship"
-	vtargetrun ${STARSHIP} completions zsh  >starship.zsh
-	vtargetrun ${STARSHIP} completions bash >starship.bash
-	vtargetrun ${STARSHIP} completions fish >starship.fish
-}
+checksum=2b2fc84feb0197104982e8baf17952449375917da66b7a98b3e3fd0be63e5dba
 
 do_check() {
 	mkdir -p fake-home
@@ -28,9 +21,10 @@ do_check() {
 }
 
 post_install() {
-	vcompletion starship.bash bash
-	vcompletion starship.fish fish
-	vcompletion starship.zsh zsh
+	for shell in bash fish zsh; do
+		vtargetrun ${DESTDIR}/usr/bin/starship completions ${shell} > starship.${shell}
+		vcompletion starship.${shell} ${shell}
+	done
 
 	vlicense LICENSE
 }

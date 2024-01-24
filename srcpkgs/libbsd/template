@@ -1,6 +1,6 @@
 # Template file for 'libbsd'
 pkgname=libbsd
-version=0.11.6
+version=0.11.8
 revision=1
 build_style=gnu-configure
 makedepends="libmd-devel"
@@ -9,14 +9,14 @@ maintainer="Duncaen <duncaen@voidlinux.org>"
 license="ISC, MIT, Beerware, BSD-2-Clause, BSD-3-Clause, BSD-4-Clause"
 homepage="https://libbsd.freedesktop.org/"
 distfiles="https://libbsd.freedesktop.org/releases/libbsd-${version}.tar.xz"
-checksum=19b38f3172eaf693e6e1c68714636190c7e48851e45224d720b3b5bc0499b5df
+checksum=55fdfa2696fb4d55a592fa9ad14a9df897c7b0008ddb3b30c419914841f85f33
 
 post_install() {
 	vlicense COPYING
 }
 
 libbsd-devel_package() {
-	depends="${sourcepkg}>=${version}_${revision}"
+	depends="${sourcepkg}>=${version}_${revision} libmd-devel"
 	short_desc+=" - development files"
 	pkg_install() {
 		vmove usr/include

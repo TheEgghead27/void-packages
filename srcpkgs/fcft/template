@@ -1,11 +1,10 @@
 # Template file for 'fcft'
 pkgname=fcft
-version=3.1.2
+version=3.1.7
 revision=1
-wrksrc=$pkgname
 build_style=meson
-configure_args="-Drun-shaping=$(vopt_if textshaping enabled disabled)
- -Ddocs=enabled"
+configure_args="-Ddocs=enabled
+ $(vopt_feature textshaping run-shaping)"
 hostmakedepends="pkg-config scdoc"
 makedepends="fontconfig-devel freetype-devel pixman-devel tllist
  $(vopt_if textshaping harfbuzz-devel)
@@ -14,8 +13,9 @@ short_desc="Simple library for font loading and glyph rasterization"
 maintainer="Isaac Freund <mail@isaacfreund.com>"
 license="MIT"
 homepage="https://codeberg.org/dnkl/fcft"
-distfiles="${homepage}/archive/${version}.tar.gz"
-checksum=f571afe693d3fa11fe36e97c7a2ecbbf9313755ee31c1ec3dcc648796b8e6db0
+changelog="https://codeberg.org/dnkl/fcft/raw/branch/master/CHANGELOG.md"
+distfiles="https://codeberg.org/dnkl/fcft/archive/${version}.tar.gz"
+checksum=53ad699d388812ec210a50ed34114d6a2de40d6fcae5b8bf2b4098d8d4ba7507
 
 build_options="textshaping"
 build_options_default="textshaping"

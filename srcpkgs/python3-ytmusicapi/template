@@ -1,18 +1,17 @@
 # Template file for 'python3-ytmusicapi'
 pkgname=python3-ytmusicapi
-version=0.22.0
+version=1.4.2
 revision=1
-wrksrc="ytmusicapi-${version}"
-build_style=python3-module
-hostmakedepends="python3-setuptools"
+build_style=python3-pep517
+hostmakedepends="python3-setuptools_scm python3-wheel"
 depends="python3-requests"
 checkdepends="$depends python3-coverage"
 short_desc="Unofficial API for YouTube Music"
 maintainer="Andrew Benson <abenson+void@gmail.com>"
 license="MIT"
 homepage="https://github.com/sigma67/ytmusicapi"
-distfiles="${homepage}/archive/refs/tags/${version}.tar.gz"
-checksum=5240fc8862a6bf7fd602bc420a0b48d81fae389acad6ff1ee8eeb5ed32ae09b9
+distfiles="${PYPI_SITE}/y/ytmusicapi/ytmusicapi-${version}.tar.gz"
+checksum=7a0e528eccd304fa9f4d2066860eaf3b50fc1c24b4a56162e17a52a225658582
 
 post_install() {
 	vlicense LICENSE

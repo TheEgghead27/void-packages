@@ -1,13 +1,13 @@
 # Template file for 'netpbm'
 pkgname=netpbm
 # from http://svn.code.sf.net/p/netpbm/code/advanced/doc/HISTORY
-version=10.99.01
+version=11.05.01
 revision=1
-_githash=51ae6d9e027a7308e9b3c22305bd8206344f3f7c
-_githash_guide=a40b2193126fbdba69128b258ec1f2ce13165017
+_githash=f900db12f6cd4e361b37cf2c6739ac469b6fcafb
+_githash_guide=b2dd0abf08166bfd865f9e20234116d36384b746
 create_wrksrc=yes
 build_wrksrc="netpbm-mirror-${_githash}"
-hostmakedepends="pkg-config perl python flex"
+hostmakedepends="flex perl pkg-config python3"
 makedepends="libX11-devel libjpeg-turbo-devel libpng-devel libxml2-devel
  tiff-devel zlib-devel"
 short_desc="Toolkit for manipulation of graphic images"
@@ -16,8 +16,8 @@ license="BSD-3-Clause,GPL-2.0-only,custom:netpbm"
 homepage="http://netpbm.sourceforge.net/"
 distfiles="https://github.com/leahneukirchen/netpbm-mirror/archive/${_githash}.tar.gz
  https://github.com/leahneukirchen/netpbm-mirror/archive/${_githash_guide}.tar.gz"
-checksum="029981746e76c047328cc16b305134dc5f1f37c12338c062d940e932c1ee33b2
- 710835af26eb98a354cec57eaccfd396828a1b6bd24d10ea3ad6dca3e02367c1"
+checksum="6af106647ebc84fa96a6b34690858d29a0b6650906afd31294b811dadd22b504
+ 5b68629856bd36b9a57add8cb3b4c76314c34840012dcd1506b6cc254b6f5b7a"
 
 post_extract() {
 	cd $build_wrksrc
@@ -26,7 +26,6 @@ post_extract() {
 	done
 
 	cd ../netpbm-mirror-${_githash_guide}
-	vsed -i 's/ id="pamhomography"//g' pamhomography.html
 }
 
 do_configure() {

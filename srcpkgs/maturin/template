@@ -1,8 +1,8 @@
 # Template file for 'maturin'
 pkgname=maturin
-version=0.13.1
+version=1.4.0
 revision=1
-build_style=python3-module
+build_style=python3-pep517
 build_helper="qemu rust"
 hostmakedepends="python3-setuptools-rust python3-tomli python3-wheel cargo"
 makedepends="openssl-devel"
@@ -11,47 +11,17 @@ short_desc="Build and publish crates as python packages"
 maintainer="Andrew J. Hesford <ajh@sideband.org>"
 license="Apache-2.0, MIT"
 homepage="https://github.com/PyO3/maturin"
-# bump target-lexicon version if it changes in Cargo.lock
-distfiles="${homepage}/archive/v${version}.tar.gz
- https://github.com/bytecodealliance/target-lexicon/archive/v0.12.4.tar.gz>target-lexicon-${version}.tar.gz"
-checksum="9258fd7ce202ba57956f95f557310c6fcdf6c7715b4eee06630355885d227962
- f801dbb02555852e90d56d5a71e73ee42678c1bc583bb62a2970d4158f6ab6de"
+distfiles="${homepage}/archive/v${version}.tar.gz"
+checksum=cd2cd3d465619bb997b41594398310e8b257d0c17854a58ca0598efa11e6d698
 # Tests use unstable features and fail to build
 make_check=no
+
+export CARGO_REGISTRIES_CRATES_IO_PROTOCOL=sparse
 
 if [ "$CROSS_BUILD" ]; then
 	makedepends+=" rust-std"
 fi
 
-post_extract() {
-	mv ../target-lexicon* target-lexicon
-	echo "[patch.crates-io]" >> Cargo.toml
-	echo "target-lexicon = { path = './target-lexicon' }" >> Cargo.toml
-}
-
-post_patch() {
-	# Disable the 'rustls' feature, which leads to bad platform compatibility
-	vsed -i -e '/^default =/s/"rustls", //' Cargo.toml
-}
-
 post_install() {
 	vlicense license-mit LICENSE-MIT
-	python3 setup.py install --prefix=/usr --root=${DESTDIR}
-
-	# Wheel installers would move the data components into the main
-	# hierarchy automatically, but that doesn't happen here; do it manually.
-	# See https://peps.python.org/pep-0491/#the-data-directory
-	local _pydata="${DESTDIR}/${py3_sitelib}/maturin-${version}.data"
-	vmkdir usr/bin
-	mv "${_pydata}/scripts/maturin" "${DESTDIR}/usr/bin"
-
-	# Generate and install some completions
-	local _matbin="${DESTDIR}/usr/bin/maturin"
-	vtargetrun "${_matbin}" completions zsh > maturin.zsh
-	vtargetrun "${_matbin}" completions fish > maturin.fish
-	vtargetrun "${_matbin}" completions bash > maturin.bash
-
-	vcompletion maturin.zsh zsh
-	vcompletion maturin.fish fish
-	vcompletion maturin.bash bash
 }

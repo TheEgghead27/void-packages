@@ -1,6 +1,6 @@
 # Template file for 'dolphin-plugins'
 pkgname=dolphin-plugins
-version=22.04.3
+version=23.08.4
 revision=1
 build_style=cmake
 hostmakedepends="extra-cmake-modules gettext qt5-qmake qt5-host-tools kcoreaddons kconfig"
@@ -10,4 +10,4 @@ maintainer="Domenico Panella <pandom79@gmail.com>"
 license="GPL-2.0-or-later"
 homepage="https://kde.org/applications/en/system/org.kde.dolphin_plugins"
 distfiles="${KDE_SITE}/release-service/${version}/src/${pkgname}-${version}.tar.xz"
-checksum=2e4a2cc09caa82689b724295d5514b30f06d0f9c7fc594f3635d31217eee21c6
+checksum=9c411fdf09f506b9952017b41d7f46e0696ac2ae46da1489735e47d35fab33d4

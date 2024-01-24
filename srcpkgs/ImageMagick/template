@@ -1,26 +1,26 @@
 # Template file for 'ImageMagick'
 pkgname=ImageMagick
-version=7.1.0.44
-revision=1
-_release_suffix=${version##*.}
-_upstream_version="${version%.${_release_suffix}}-${_release_suffix}"
-wrksrc=${pkgname}-${_upstream_version}
+# Revbump php*-imagick with ImageMagick updates.
+version=7.1.1.18
+revision=2
+_upstream_version="${version/.${version##*.}/-${version##*.}}"
 build_style=gnu-configure
 configure_args="--disable-static --enable-opencl --with-modules --with-gslib
- --with-rsvg --with-wmf --with-dejavu-font-dir=/usr/share/fonts/TTF
+ --with-rsvg --with-wmf --with-dejavu-font-dir=/usr/share/fonts/TTF --with-openexr
  --with-gs-font-dir=/usr/share/fonts/Type1"
 hostmakedepends="automake libtool pkg-config autoconf"
 makedepends="djvulibre-devel fftw-devel ghostscript-devel glib-devel lcms2-devel
  libXt-devel libgomp-devel libltdl-devel librsvg-devel libwebp-devel libwmf-devel
  ocl-icd-devel pango-devel libopenjpeg2-devel graphviz-devel liblqr-devel
- libraqm-devel"
+ libraqm-devel libopenexr-devel libheif-devel"
+checkdepends="ttf-opensans"
 short_desc="Create, edit, compose, or convert bitmap images"
-maintainer="Orphaned <orphan@voidlinux.org>"
+maintainer="André Cerqueira <acerqueira021@gmail.com>"
 license="ImageMagick"
 homepage="https://www.imagemagick.org"
 changelog="https://raw.githubusercontent.com/ImageMagick/Website/main/ChangeLog.md"
 distfiles="https://github.com/ImageMagick/ImageMagick/archive/${_upstream_version}.tar.gz"
-checksum=1532c08c4f047aaf04e2717aac23c6d866d7e17d60a5d2c320ae29874285d49f
+checksum=77a49a5b7c8c5e85f21ce7ecb9e2a090de6b07a185090c9729577687729b7f18
 
 subpackages="libmagick libmagick-devel"
 

@@ -1,26 +1,28 @@
 # Template file for 'filezilla'
 pkgname=filezilla
-version=3.60.2
+version=3.66.4
 revision=1
 build_style=gnu-configure
 configure_args="--disable-static --disable-manualupdatecheck --disable-autoupdatecheck
  --with-wx-config=wx-config-gtk3"
 hostmakedepends="gettext pkg-config"
 makedepends="gnutls-devel pugixml-devel dbus-devel libidn-devel sqlite-devel
- gtk+3-devel wxWidgets-gtk3-devel xdg-utils libfilezilla-devel"
+ gtk+3-devel wxWidgets-gtk3-devel xdg-utils libfilezilla-devel boost-devel"
 depends="xdg-utils hicolor-icon-theme desktop-file-utils"
 short_desc="Fast and reliable FTP, FTPS and SFTP client"
 maintainer="Helmut Pozimski <helmut@pozimski.eu>"
 license="GPL-2.0-or-later"
 homepage="https://filezilla-project.org"
 changelog="https://svn.filezilla-project.org/filezilla/FileZilla3/trunk/NEWS?view=co"
-distfiles="https://download.filezilla-project.org/client/FileZilla_${version}_src.tar.bz2"
-checksum=e407dbad169953ff951452bcbf138d953a3a30235f8abb03d271c712cc7e5792
+distfiles="https://download.filezilla-project.org/client/FileZilla_${version}_src.tar.xz"
+checksum=a40f04e02efaae7b50d1515ee1c36c4b0e445818566c450e440bfd6c70e9b203
 
 if [ "$CROSS_BUILD" ]; then
 	hostmakedepends+=" wxWidgets-gtk3-devel xdg-utils"
 fi
 
-if [ "$XBPS_TARGET_NO_ATOMIC8" ]; then
-	makedepends+=" libatomic-devel"
-fi
+case "$XBPS_TARGET_MACHINE" in
+	i686*|x86_64*)  CFLAGS="-msse2";;
+esac
+
+CXXFLAGS="-D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64"

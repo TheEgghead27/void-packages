@@ -1,24 +1,19 @@
 # Template file for 'python3-jsonschema'
 pkgname=python3-jsonschema
-version=4.6.1
+version=4.20.0
 revision=1
-wrksrc="jsonschema-${version}"
 build_style=python3-pep517
 hostmakedepends="hatchling hatch-vcs"
-depends="python3-attrs python3-pyrsistent"
+depends="python3-attrs python3-jsonschema-specifications"
+checkdepends="${depends} python3-pytest python3-idna python3-jsonpointer
+ python3-pip python3-rfc3339-validator python3-rfc3987"
 short_desc="Implementation of JSON Schema for Python3"
 maintainer="Jan Christian Grünhage <jan.christian@gruenhage.xyz>"
 license="MIT"
 homepage="https://github.com/Julian/jsonschema"
 changelog="https://raw.githubusercontent.com/Julian/jsonschema/master/CHANGELOG.rst"
 distfiles="${PYPI_SITE}/j/jsonschema/jsonschema-${version}.tar.gz"
-checksum=ec2802e6a37517f09d47d9ba107947589ae1d25ff557b925d83a321fc2aa5d3b
-# Tests require jsonschema to be installed already. Setting PYTHONPATH doesn't seem to do trick
-make_check=no
-
-pre_build() {
-	export SETUPTOOLS_SCM_PRETEND_VERSION="${version}"
-}
+checksum=4f614fd46d8d61258610998997743ec5492a648b33cf478c1ddc23ed4598a5fa
 
 post_install() {
 	vlicense COPYING LICENSE

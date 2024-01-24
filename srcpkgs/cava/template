@@ -1,20 +1,21 @@
 # Template file for 'cava'
 pkgname=cava
-version=0.8.2
+version=0.10.0
 revision=1
 build_style=gnu-configure
-hostmakedepends="automake libtool"
-makedepends="fftw-devel iniparser-devel ncurses-devel
- $(vopt_if alsa 'alsa-lib-devel') $(vopt_if pulseaudio 'pulseaudio-devel')
- $(vopt_if sndio 'sndio-devel')"
+hostmakedepends="autoconf-archive automake libtool pkg-config"
+makedepends="fftw-devel iniparser-devel ncurses-devel SDL2-devel
+ $(vopt_if alsa 'alsa-lib-devel') $(vopt_if pipewire 'pipewire-devel')
+ $(vopt_if pulseaudio 'pulseaudio-devel') $(vopt_if sndio 'sndio-devel')"
 short_desc="Console-based Audio Visualizer for ALSA"
 maintainer="skmpz <dem.procopiou@gmail.com>"
 license="MIT"
 homepage="https://github.com/karlstav/cava"
-distfiles="${homepage}/archive/${version}.tar.gz"
-checksum=99bc302ce77f8093a4ac1cf94be51581e37c075428117f248ffe1fee650f47d8
-build_options="alsa pulseaudio sndio"
-build_options_default="alsa pulseaudio sndio"
+changelog="https://github.com/karlstav/cava/releases"
+distfiles="https://github.com/karlstav/cava/archive/refs/tags/${version}.tar.gz"
+checksum=1e40c93cb476ada538c131cb68ab1b56ce214d75b834508cbe76a57ae1ea153f
+build_options="alsa pipewire pulseaudio sndio"
+build_options_default="alsa pipewire pulseaudio sndio"
 
 pre_configure() {
 	NOCONFIGURE=1 ./autogen.sh
@@ -22,6 +23,5 @@ pre_configure() {
 
 post_install() {
 	vlicense LICENSE
-	vmkdir usr/share/examples
-	vcopy example_files usr/share/examples/cava
+	vsconf example_files/config
 }

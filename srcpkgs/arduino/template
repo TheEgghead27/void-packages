@@ -3,7 +3,6 @@ pkgname=arduino
 version=1.8.19
 revision=2
 archs="x86_64* i686* aarch64* arm*"
-wrksrc=$pkgname-$version
 create_wrksrc=yes
 build_wrksrc=Arduino-$version
 hostmakedepends="apache-ant unzip ImageMagick openjdk8 tar"
@@ -27,10 +26,10 @@ fi
 
 do_build() {
 	. /etc/profile.d/apache-ant.sh
-	. /etc/profile.d/openjdk.sh
+	. /etc/profile.d/jdk.sh
 
-	export CFLAGS+=" -I${XBPS_CROSS_BASE}/usr/lib/jvm/java-1.8-openjdk/include/linux"
-	export CFLAGS+=" -I${XBPS_CROSS_BASE}/usr/lib/jvm/java-1.8-openjdk/include"
+	export CFLAGS+=" -I${XBPS_CROSS_BASE}/${JAVA_HOME}/include/linux"
+	export CFLAGS+=" -I${XBPS_CROSS_BASE}/${JAVA_HOME}/include"
 
 	mkdir -p build/linux/work/lib
 	cd ../astyle/build/gcc

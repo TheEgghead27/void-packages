@@ -1,10 +1,9 @@
 # Template file for 'python3-shellingham'
 pkgname=python3-shellingham
-version=1.4.0
+version=1.5.4
 revision=1
-wrksrc=shellingham-${version}
-build_style=python3-module
-hostmakedepends="python3-setuptools"
+build_style=python3-pep517
+hostmakedepends="python3-setuptools python3-wheel"
 depends="python3"
 checkdepends="python3-pytest-mock"
 short_desc="Python tool to detect surrounding shell"
@@ -13,7 +12,7 @@ license="ISC"
 homepage="https://github.com/sarugaku/shellingham"
 changelog="https://raw.githubusercontent.com/sarugaku/shellingham/master/CHANGELOG.rst"
 distfiles="https://github.com/sarugaku/shellingham/archive/refs/tags/${version}.tar.gz"
-checksum=df6c61abc6d4112cdb8665e780cd4692dd7fcd88c9b8513cb096a0dd247effe0
+checksum=9efba7106b6192be290b6ea1e92f6b2fb04d8059ff364cabf9c08fba1e4dae71
 
 post_install() {
 	vlicense LICENSE

@@ -1,72 +1,67 @@
-From 4c05448f1c6a40583b6649cadc23d417bb90d2ef Mon Sep 17 00:00:00 2001
+From d50a7241de7ebba53bec74b3dd5086417f38923b Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jan=20Christian=20Gr=C3=BCnhage?=
  <jan.christian@gruenhage.xyz>
-Date: Wed, 8 Jun 2022 16:15:55 +0200
-Subject: [PATCH 1/2] use system libraries
+Date: Sat, 16 Dec 2023 14:01:23 +0100
+Subject: [PATCH] use system libraries
 
 ---
- Cargo.lock                                  | 2 ++
- Cargo.toml                                  | 4 ++++
- crates/old/nu_plugin_from_sqlite/Cargo.toml | 2 +-
- crates/old/nu_plugin_to_sqlite/Cargo.toml   | 2 +-
- 4 files changed, 8 insertions(+), 2 deletions(-)
+ Cargo.lock                   | 1 -
+ Cargo.toml                   | 2 +-
+ crates/nu-cli/Cargo.toml     | 2 +-
+ crates/nu-command/Cargo.toml | 2 +-
+ 4 files changed, 3 insertions(+), 4 deletions(-)
 
 diff --git a/Cargo.lock b/Cargo.lock
-index bed0c1c50..95f833fbc 100644
+index 495bc2678..c7c1e24c7 100644
 --- a/Cargo.lock
 +++ b/Cargo.lock
-@@ -2488,6 +2488,7 @@ dependencies = [
-  "serial_test",
-  "tempfile",
-  "winres",
-+ "zstd",
- ]
- 
- [[package]]
-@@ -5490,4 +5491,5 @@ checksum = "9fd07cbbc53846d9145dbffdf6dd09a7a0aa52be46741825f5c97bdd4f73f12b"
+@@ -2194,7 +2194,6 @@ version = "0.26.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "afc22eff61b133b115c6e8c74e818c628d6d5e7a502afea6f64dee076dd94326"
  dependencies = [
-  "cc",
-  "libc",
-+ "pkg-config",
+- "cc",
+  "pkg-config",
+  "vcpkg",
  ]
 diff --git a/Cargo.toml b/Cargo.toml
-index 26df23417..98209824c 100644
+index b3848de41..b8236f27a 100644
 --- a/Cargo.toml
 +++ b/Cargo.toml
-@@ -118,3 +118,7 @@ debug = false
- [[bin]]
- name = "nu"
- path = "src/main.rs"
-+
-+[dependencies.zstd]
-+features = ["pkg-config"]
-+version = ">=0.0.0"
-diff --git a/crates/old/nu_plugin_from_sqlite/Cargo.toml b/crates/old/nu_plugin_from_sqlite/Cargo.toml
-index c805ef8eb..fd7565c7c 100644
---- a/crates/old/nu_plugin_from_sqlite/Cargo.toml
-+++ b/crates/old/nu_plugin_from_sqlite/Cargo.toml
-@@ -18,7 +18,7 @@ nu-source = { path="../nu-source", version = "0.63.1" }
- tempfile = "3.2.0"
+@@ -69,7 +69,7 @@ nu-term-grid = { path = "./crates/nu-term-grid", version = "0.88.1" }
+ nu-std = { path = "./crates/nu-std", version = "0.88.1" }
+ nu-utils = { path = "./crates/nu-utils", version = "0.88.1" }
+ nu-ansi-term = "0.49.0"
+-reedline = { version = "0.27.0", features = ["bashisms", "sqlite"] }
++reedline = { version = "0.27.0", features = ["bashisms", "sqlite-dynlib"] }
  
- [dependencies.rusqlite]
--features = ["bundled", "blob"]
-+features = ["blob"]
- version = "0.26.1"
+ crossterm = "0.27"
+ ctrlc = "3.4"
+diff --git a/crates/nu-cli/Cargo.toml b/crates/nu-cli/Cargo.toml
+index d07b6dab4..c2e50461d 100644
+--- a/crates/nu-cli/Cargo.toml
++++ b/crates/nu-cli/Cargo.toml
+@@ -25,7 +25,7 @@ nu-protocol = { path = "../nu-protocol", version = "0.88.1" }
+ nu-utils = { path = "../nu-utils", version = "0.88.1" }
+ nu-color-config = { path = "../nu-color-config", version = "0.88.1" }
+ nu-ansi-term = "0.49.0"
+-reedline = { version = "0.27.0", features = ["bashisms", "sqlite"] }
++reedline = { version = "0.27.0", features = ["bashisms", "sqlite-dynlib"] }
  
- [build-dependencies]
-diff --git a/crates/old/nu_plugin_to_sqlite/Cargo.toml b/crates/old/nu_plugin_to_sqlite/Cargo.toml
-index 7146b4c33..78ad01ab0 100644
---- a/crates/old/nu_plugin_to_sqlite/Cargo.toml
-+++ b/crates/old/nu_plugin_to_sqlite/Cargo.toml
-@@ -18,7 +18,7 @@ nu-source = { path="../nu-source", version = "0.63.1" }
- tempfile = "3.2.0"
- 
- [dependencies.rusqlite]
--features = ["bundled", "blob"]
-+features = ["blob"]
- version = "0.26.1"
- 
- [build-dependencies]
+ chrono = { default-features = false, features = ["std"], version = "0.4" }
+ crossterm = "0.27"
+diff --git a/crates/nu-command/Cargo.toml b/crates/nu-command/Cargo.toml
+index 4835bf264..ef8a83aaf 100644
+--- a/crates/nu-command/Cargo.toml
++++ b/crates/nu-command/Cargo.toml
+@@ -73,7 +73,7 @@ rand = "0.8"
+ rayon = "1.8"
+ regex = "1.9.5"
+ roxmltree = "0.18"
+-rusqlite = { version = "0.29", features = ["bundled", "backup"], optional = true }
++rusqlite = { version = "0.29", features = ["backup"], optional = true }
+ same-file = "1.0"
+ serde = { version = "1.0", features = ["derive"] }
+ serde_json = "1.0"
 -- 
-2.36.1
+2.43.0
 

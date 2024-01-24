@@ -1,0 +1,25 @@
+# Template file for 'limine'
+pkgname=limine
+version=6.20231227.0
+revision=1
+build_style=gnu-configure
+configure_args="--enable-all TOOLCHAIN_FOR_TARGET=llvm"
+hostmakedepends="mtools nasm llvm clang lld"
+short_desc="Advanced, portable, multiprotocol bootloader"
+maintainer="Mintsuki <mintsuki@protonmail.com>"
+license="BSD-2-Clause"
+homepage="https://limine-bootloader.org/"
+distfiles="https://github.com/limine-bootloader/limine/releases/download/v${version}/limine-${version}.tar.xz"
+checksum=0ef96e307dd73146fd4c2e88acf6bb8a7f2e385fb746e0214d3e56d49eeeb9ac
+
+post_install() {
+	vlicense COPYING
+}
+
+limine-devel_package() {
+	depends="${sourcepkg}>=${version}_${revision}"
+	short_desc+=" - development files"
+	pkg_install() {
+		vmove usr/include
+	}
+}

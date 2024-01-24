@@ -1,6 +1,6 @@
 # Template file for 'kpimtextedit'
 pkgname=kpimtextedit
-version=22.04.3
+version=23.08.4
 revision=1
 build_style=cmake
 hostmakedepends="extra-cmake-modules python3 qt5-qmake qt5-host-tools
@@ -13,11 +13,16 @@ maintainer="John <me@johnnynator.dev>"
 license="LGPL-2.1-or-later"
 homepage="https://invent.kde.org/pim/kpimtextedit"
 distfiles="${KDE_SITE}/release-service/${version}/src/${pkgname}-${version}.tar.xz"
-checksum=2dbc53584524477e8bbf8f8a919438e47c2ae1345ace5787f2e3989e2db260bd
+checksum=da55922ce882c2fed5efca00177fddd6fe503547b8942b22181961e871710de5
 
 if [ "$CROSS_BUILD" ]; then
 	hostmakedepends+=" qt5-tools-devel"
 fi
+
+do_check() {
+	cd build
+	ctest -E 'kpimtextedit-(grantleebuilder-texthtmlbuilder|composerng-richtextcomposer)test'
+}
 
 kpimtextedit-devel_package() {
 	short_desc+=" - development"

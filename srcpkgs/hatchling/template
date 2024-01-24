@@ -1,17 +1,19 @@
 # Template file for 'hatchling'
 pkgname=hatchling
-version=1.3.1
+version=1.21.0
 revision=1
 build_style=python3-pep517
-_deps="python3-pathspec python3-tomli python3-pluggy python3-packaging"
+_deps="python3-editables python3-packaging python3-pathspec python3-pluggy
+ python3-trove-classifiers"
 hostmakedepends="python3-setuptools ${_deps}"
 depends="${_deps}"
 short_desc="Extensible, standards compliant build backend used by Hatch"
 maintainer="Jan Christian Grünhage <jan.christian@gruenhage.xyz>"
 license="MIT"
 homepage="https://hatch.pypa.io/latest/"
-distfiles="${PYPI_SITE}/h/${pkgname}/${pkgname}-${version}.tar.gz"
-checksum=aaa63019c9d666053d9ff318097335e766123844547c52940155c0401c3c142f
+changelog="https://raw.githubusercontent.com/pypa/hatch/master/docs/history/hatchling.md"
+distfiles="${PYPI_SITE}/h/hatchling/hatchling-${version}.tar.gz"
+checksum=5c086772357a50723b825fd5da5278ac7e3697cdf7797d07541a6c90b6ff754c
 
 post_install() {
 	vlicense LICENSE.txt

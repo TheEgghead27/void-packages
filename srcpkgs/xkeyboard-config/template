@@ -1,6 +1,6 @@
 # Template file for 'xkeyboard-config'
 pkgname=xkeyboard-config
-version=2.36
+version=2.40
 revision=1
 build_style=meson
 configure_args="-Dxorg-rules-symlinks=true -Dcompat-rules=true"
@@ -12,8 +12,8 @@ maintainer="André Cerqueira <acerqueira021@gmail.com>"
 license="MIT"
 homepage="https://www.freedesktop.org/wiki/Software/XKeyboardConfig"
 changelog="https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config/-/raw/master/NEWS"
-distfiles="${XORG_SITE}/data/${pkgname}/${pkgname}-${version}.tar.xz"
-checksum=1f1bb1292a161d520a3485d378609277d108cd07cde0327c16811ff54c3e1595
+distfiles="${XORG_SITE}/data/xkeyboard-config/xkeyboard-config-${version}.tar.xz"
+checksum=7a3dba1bec7dc7191432da021242d17c9cf6c89690e6c57b0de048ff8c9d2ae3
 
 post_install() {
 	vlicense COPYING

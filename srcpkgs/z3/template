@@ -1,8 +1,7 @@
 # Template file for 'z3'
 pkgname=z3
-version=4.10.1
+version=4.12.5
 revision=1
-wrksrc="${pkgname}-${pkgname}-${version}"
 build_style=configure
 configure_args="--prefix=/usr -g --python $(vopt_if ocaml --ml)"
 make_build_args="-C build all examples"
@@ -15,7 +14,7 @@ maintainer="Leah Neukirchen <leah@vuxu.org>"
 license="MIT"
 homepage="https://github.com/Z3Prover/z3"
 distfiles="https://github.com/Z3Prover/z3/archive/z3-${version}.tar.gz"
-checksum=a86071a03983b3512c44c2bf130adbc3320770dc0198805f6f51c43b0946e11a
+checksum=70e211e0a8e77febccc51865e45111066f623356a4ef0b527c3597362bc6db72
 
 build_options="ocaml"
 desc_option_ocaml="Enable support for OCaml bindings"

@@ -1,17 +1,19 @@
 # Template file for 'chezmoi'
 pkgname=chezmoi
-version=2.20.0
+version=2.45.0
 revision=1
 build_style=go
 go_import_path="github.com/twpayne/chezmoi/v2"
 go_build_tags="noembeddocs noupgrade"
 go_ldflags="-X main.version=${version} -X main.commit=v${version} -X main.builtBy=xbps"
+checkdepends="tar git"
 short_desc="Manage your dotfiles across multiple machines, securely"
 maintainer="classabbyamp <void@placeviolette.net>"
 license="MIT"
 homepage="https://chezmoi.io/"
+changelog="https://github.com/twpayne/chezmoi/releases"
 distfiles="https://github.com/twpayne/chezmoi/archive/v${version}.tar.gz"
-checksum=7e22412a7a766d2156927e687e73c8c139cd014eb33846366884d8ffb7fdc654
+checksum=4f105472a0b419c1f9bf15dc3ecc2009d98be113c87c257cf0710ce97edea714
 
 pre_build() {
 	local _date
@@ -21,10 +23,13 @@ pre_build() {
 	fi
 }
 
+do_check() {
+	make test
+}
+
 post_install() {
 	vlicense LICENSE
-
-	vcompletion completions/chezmoi-completion.bash bash chezmoi
-	vcompletion completions/chezmoi.fish fish chezmoi
-	vcompletion completions/chezmoi.zsh zsh chezmoi
+	vcompletion completions/chezmoi-completion.bash bash
+	vcompletion completions/chezmoi.fish fish
+	vcompletion completions/chezmoi.zsh zsh
 }

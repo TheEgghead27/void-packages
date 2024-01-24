@@ -1,14 +1,15 @@
 # Template file for 'linux-firmware'
 pkgname=linux-firmware
-version=20220411
-revision=1
-depends="${pkgname}-amd>=${version}_${revision} ${pkgname}-network>=${version}_${revision}"
+version=20231211
+revision=2
+hostmakedepends="rdfind which"
+depends="linux-firmware-amd>=${version}_${revision} linux-firmware-network>=${version}_${revision}"
 short_desc="Binary firmware blobs for the Linux kernel"
 maintainer="Érico Nogueira <ericonr@disroot.org>"
-license="See /usr/share/licenses/${pkgname}"
+license="custom:see /usr/share/licenses/linux-firmware"
 homepage="https://www.kernel.org/"
-distfiles="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/${pkgname}-${version}.tar.gz"
-checksum=533ae621b3eacf6a4696dab52a9dbc5727403a175c413b1682ab3f9cfb37872f
+distfiles="https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/snapshot/linux-firmware-${version}.tar.gz"
+checksum=d0ba54f05f5dd34b0fc5a1e1970cd9cbc48491d2da97f3798a9e13530dc18298
 python_version=3
 nostrip=yes
 
@@ -42,13 +43,14 @@ linux-firmware-amd_package() {
 linux-firmware-broadcom_package() {
 	short_desc+=" - Broadcom network blobs"
 	nostrip=yes
-	replaces="rpi-firmware-network>=0"
 	pkg_install() {
 		vmove usr/lib/firmware/brcm
 		vmove usr/share/licenses/linux-firmware/LICENCE.broadcom_bcm43xx
 		# firmware/brcm contains multiple symlinks to ../cypress/
 		vmove usr/lib/firmware/cypress
 		vmove usr/share/licenses/linux-firmware/LICENCE.cypress
+		# provided by rpi-firmware
+		find "${PKGDESTDIR}"/usr/lib/firmware/brcm -iname '*raspberry*.txt' -delete
 	}
 }
 
@@ -93,7 +95,9 @@ linux-firmware-network_package() {
 		vmove usr/lib/firmware/kaweth
 		vmove usr/lib/firmware/libertas
 		vmove usr/lib/firmware/mrvl
-		vmove "usr/lib/firmware/mt*.bin"
+		vmove "usr/lib/firmware/mt7*.bin"
+		# don't move mediatek SoC firmware
+		( shopt -s extglob; vmove "usr/lib/firmware/mediatek/!(mt7981*|mt7986*|mt81*|sof*)" )
 		vmove usr/lib/firmware/ueagle-atm
 		vmove usr/lib/firmware/ti-connectivity
 		vmove usr/lib/firmware/dpaa2

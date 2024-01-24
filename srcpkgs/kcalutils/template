@@ -1,17 +1,22 @@
 # Template file for 'kcalutils'
 pkgname=kcalutils
-version=22.04.3
+version=23.08.4
 revision=1
 build_style=cmake
 hostmakedepends="extra-cmake-modules qt5-qmake qt5-host-tools python3
  gettext kcoreaddons kconfig"
 makedepends="kcalendarcore-devel kidentitymanagement-devel"
-short_desc="The KDE calendar utility library"
+short_desc="KDE calendar utility library"
 maintainer="John <me@johnnynator.dev>"
 license="LGPL-2.0-or-later"
 homepage="https://community.kde.org/KDE_PIM"
 distfiles="${KDE_SITE}/release-service/${version}/src/kcalutils-${version}.tar.xz"
-checksum=7082232f10716184d982d200d62a55eaaed76b6712ccb4c2881c0ae6c9b662ef
+checksum=a4e549be3711a409cd49ed0147ffe4f228e207e21f1fffb00ff171462d4b569d
+
+do_check() {
+	cd build
+	ctest -E 'kcalutils-testincidenceformatter'
+}
 
 kcalutils-devel_package() {
 	depends="${sourcepkg}>=${version}_${revision} ${makedepends}"

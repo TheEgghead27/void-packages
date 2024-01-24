@@ -1,8 +1,7 @@
 # Template file for 'python3-Pillow'
 pkgname=python3-Pillow
-version=9.2.0
+version=10.2.0
 revision=1
-wrksrc="Pillow-${version}"
 build_style=python3-module
 hostmakedepends="python3-setuptools"
 makedepends="python3-devel libjpeg-turbo-devel libopenjpeg2-devel
@@ -14,8 +13,8 @@ maintainer="Andrew J. Hesford <ajh@sideband.org>"
 license="custom:PIL"
 homepage="https://python-pillow.org"
 changelog="https://raw.githubusercontent.com/python-pillow/Pillow/master/CHANGES.rst"
-distfiles="${PYPI_SITE}/P/Pillow/Pillow-${version}.tar.gz"
-checksum=75e636fd3e0fb872693f23ccb8a5ff2cd578801251f3a4f6854c6a5d437d3c04
+distfiles="${PYPI_SITE}/p/pillow/pillow-${version}.tar.gz"
+checksum=e87f0b2c78157e12d7686b27d63c070fd65d994e8ddae6f328e0dcf4a0cd007e
 
 post_install() {
 	vlicense LICENSE
